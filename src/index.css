@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: #F7F1E5;
+  color: #1F1B18;
+  font-family:
+    "Hiragino Sans",
+    "Noto Sans JP",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    "Noto Serif JP",
+    "Noto Serif",
+    serif;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 300ms ease;
+}
+
+/* Remove default scrollbar styling on iOS */
+input[type="text"],
+input[type="search"],
+textarea {
+  appearance: none;
+  border-radius: 0;
+  transition: none;
+}
+
+/* Prevent flickering on Safari */
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection on inputs and textareas */
+input, textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
