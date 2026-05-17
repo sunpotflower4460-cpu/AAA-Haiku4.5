@@ -36,9 +36,20 @@ export default {
         '34': '8.5rem',
         '55': '13.75rem',
         '89': '22.25rem',
+        'safe-area-inset-bottom': 'env(safe-area-inset-bottom)',
+        'safe-area-inset-top': 'env(safe-area-inset-top)',
       },
       lineHeight: {
         'relaxed-jp': '1.618',
+      },
+      keyframes: {
+        'fade-out': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+      },
+      animation: {
+        'fade-out': 'fade-out 2s ease-out 0.5s forwards',
       },
     },
   },

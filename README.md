@@ -121,32 +121,48 @@ type Note = {
 |----------|------|------|
 | **Phase 1** | ✅ 完了 | 設計・コンセプト確立 |
 | **Phase 2** | ✅ 完了 | 設計監査 |
-| **Phase 3** | 🔄 進行中 | MVP実装 |
+| **Phase 3** | ✅ 完了 | MVP実装 |
+| **Phase 4** | ✅ 完了 | 最終調整・デバッグ・デプロイ準備 |
 
 詳細は [docs/development-phases.md](docs/development-phases.md) を参照。
 
 ---
 
-## Cloudflare Pagesデプロイ方針
+## Cloudflare Pagesデプロイ
 
-**Phase 3のMVP実装中はCloudflare Pagesへのデプロイはしません。**
+### ビルド確認
 
-MVP完成後、以下の条件がすべて満たされている場合にのみ、デプロイ準備を行います：
+MVPはPhase 4で完全にテストされています。ビルドは本番環境で成功しています：
 
-- ✅ `npm run build` が成功している
-- ✅ すべてのMVP機能が動作している
-- ✅ READMEが完全に更新されている
-- ✅ Phase 1/2の設計と大きくズレていない
-
-### デプロイ準備（将来）
-
-Cloudflare Pagesへのデプロイ時の推奨設定：
-
+```bash
+npm run build
 ```
-Build command: npm run build
-Build output directory: dist
-Environment: Node.js 18
-```
+
+**ビルド出力ディレクトリ**: `dist/`
+
+### Cloudflare Pages設定
+
+Cloudflare Pagesに接続する場合、以下の設定を使用してください：
+
+**環境変数**: 不要（MVP段階では環境変数は不要です）
+
+**ビルド設定**:
+- **Build command**: `npm run build`
+- **Build output directory**: `dist`
+- **Node.js version**: 18 以上
+
+### 手動デプロイ手順
+
+1. **リポジトリを Cloudflare Pages に接続**
+   - Cloudflare Dashboard にアクセス
+   - Pages → アカウント作成 → このリポジトリを選択
+   - ビルド設定を上記に設定
+
+2. **自動デプロイが有効**
+   - `main` ブランチへのプッシュで自動ビルド・デプロイ
+
+3. **プレビューデプロイ**
+   - プルリクエスト作成時に自動的にプレビューURLが生成
 
 ---
 
@@ -169,6 +185,7 @@ Environment: Node.js 18
 | [docs/design-system.md](docs/design-system.md) | UI/UXとデザインシステム |
 | [docs/mvp-spec.md](docs/mvp-spec.md) | MVP仕様 |
 | [docs/development-phases.md](docs/development-phases.md) | 開発フェーズ |
+| [docs/final-polish-and-deploy-phase-4.md](docs/final-polish-and-deploy-phase-4.md) | Phase 4 最終調整・デバッグ・デプロイレポート |
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Cloud Agent / Copilot向け作業ルール |
 
 ---
@@ -194,3 +211,5 @@ ISC
 ```
 
 この体験を大切にしています。
+
+**Phase 4 で最終調整・デバッグ完了。公開可能な状態です。**

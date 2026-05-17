@@ -69,7 +69,7 @@ export default function NotesList({
       <div className="flex-1 overflow-auto">
         {filteredNotes.length === 0 ? (
           searchQuery ? (
-            <div className="flex h-full items-center justify-center">
+            <div className="flex h-full items-center justify-center px-[21px]">
               <p className="text-center text-ink-muted">
                 「{searchQuery}」に該当するメモは見つかりません。
               </p>
@@ -78,7 +78,7 @@ export default function NotesList({
             <EmptyState onNewNote={onNewNote} />
           )
         ) : (
-          <div className="space-y-[13px] p-[21px] pb-[34px]">
+          <div className="space-y-[13px] p-[21px] pb-[89px]">
             {filteredNotes.map((note) => (
               <NoteCard
                 key={note.id}
