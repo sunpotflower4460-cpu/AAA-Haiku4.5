@@ -23,7 +23,6 @@ export default function NoteEditor({
   const [body, setBody] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
   const [showSavedStatus, setShowSavedStatus] = useState(false);
-  const [lastSavedAt, setLastSavedAt] = useState<number>(0);
 
   useEffect(() => {
     if (note) {
@@ -45,7 +44,6 @@ export default function NoteEditor({
       };
       onSave(updated);
       setShowSavedStatus(true);
-      setLastSavedAt(Date.now());
       setTimeout(() => setShowSavedStatus(false), 1800);
     }
   }, [note, title, body, isFavorite, onSave]);
