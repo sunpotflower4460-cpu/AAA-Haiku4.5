@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Note } from '../types/note';
 import { copy } from '../lib/i18n';
 
 interface NoteEditorProps {
   note: Note | null;
   onSave: (note: Note) => void;
+  onSaveAndNavigate: (note: Note) => void;
   onDelete: (id: string) => void;
   onBack: () => void;
   onToggleFavorite: (id: string) => void;
@@ -13,6 +14,7 @@ interface NoteEditorProps {
 export default function NoteEditor({
   note,
   onSave,
+  onSaveAndNavigate,
   onDelete,
   onBack,
   onToggleFavorite,
@@ -30,7 +32,8 @@ export default function NoteEditor({
     }
   }, [note]);
 
-  const handleSave = () => {
+  // Use useCallback to prevent stale closure issues
+  const handleSaveInternal = useCallback(() => {
     if (note) {
       const updated: Note = {
         ...note,
@@ -43,7 +46,7 @@ export default function NoteEditor({
       setShowSavedStatus(true);
       setTimeout(() => setShowSavedStatus(false), 2000);
     }
-  };
+  }, [note, title, body, isFavorite, onSave]);
 
   const handleDelete = () => {
     const message = copy.confirmDelete;
@@ -61,10 +64,9 @@ export default function NoteEditor({
 
   // Auto-save on content change
   useEffect(() => {
-    if (note) {
-      handleSave();
-    }
-  }, [title, body, isFavorite]);
+    const timer = setTimeout(handleSaveInternal, 500);
+    return () => clearTimeout(timer);
+  }, [handleSaveInternal]);
 
   return (
     <div className="flex h-full flex-col bg-washi">
@@ -153,7 +155,7 @@ export default function NoteEditor({
           value={body}
           onChange={(e) => setBody(e.target.value)}
           placeholder={copy.writeHere}
-          className="h-full w-full resize-none bg-transparent text-base text-sumi placeholder-ink-muted/50 outline-none leading-relaxed-jp"
+          className="h-full w-full resize-none bg-transparent text-base text-sumi placeholder-ink-muted/50 outline-none leading-relaxed-jp transition-none"
         />
       </div>
     </div>

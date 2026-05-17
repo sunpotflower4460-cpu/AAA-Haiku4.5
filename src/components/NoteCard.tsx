@@ -1,5 +1,6 @@
 import { Note } from '../types/note';
 import { formatDate } from '../lib/date';
+import { copy } from '../lib/i18n';
 
 interface NoteCardProps {
   note: Note;
@@ -16,8 +17,7 @@ export default function NoteCard({
 }: NoteCardProps) {
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const message = 'この言葉を手放しますか？';
-    if (window.confirm(message)) {
+    if (window.confirm(copy.confirmDelete)) {
       onDelete(note.id);
     }
   };
@@ -27,7 +27,7 @@ export default function NoteCard({
     onToggleFavorite(note.id);
   };
 
-  const title = note.title || '無題の余白';
+  const title = note.title || copy.untitledNote;
   const preview = note.body.substring(0, 60).replace(/\n/g, ' ') || '(本文なし)';
 
   return (

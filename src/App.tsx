@@ -27,7 +27,7 @@ function App() {
 
   const handleNewNote = () => {
     const newNote: Note = {
-      id: Math.random().toString(36).substring(2, 11),
+      id: crypto.randomUUID(),
       title: '',
       body: '',
       createdAt: new Date().toISOString(),
@@ -43,7 +43,7 @@ function App() {
     setScreen('editor');
   };
 
-  const handleSaveNote = (updatedNote: Note) => {
+  const handleSaveNote = (updatedNote: Note, navigate = true) => {
     const existingIndex = notes.findIndex((n) => n.id === updatedNote.id);
     if (existingIndex >= 0) {
       // Update existing note
@@ -54,7 +54,9 @@ function App() {
       // Add new note
       setNotes([updatedNote, ...notes]);
     }
-    setScreen('list');
+    if (navigate) {
+      setScreen('list');
+    }
   };
 
   const handleDeleteNote = (id: string) => {
@@ -83,7 +85,8 @@ function App() {
       ) : (
         <NoteEditor
           note={selectedNote}
-          onSave={handleSaveNote}
+          onSave={(note) => handleSaveNote(note, false)}
+          onSaveAndNavigate={(note) => handleSaveNote(note, true)}
           onDelete={handleDeleteNote}
           onBack={() => setScreen('list')}
           onToggleFavorite={handleToggleFavorite}
