@@ -21,7 +21,7 @@ export default function EmptyState({ onNewNote }: EmptyStateProps) {
       {/* Action button */}
       <button
         onClick={onNewNote}
-        className="mt-[34px] rounded-lg bg-indigo px-[21px] py-[13px] text-sm font-medium text-white transition-all hover:shadow-lg active:scale-95"
+        className="mt-[34px] rounded-lg bg-gold px-[21px] py-[13px] text-sm font-medium text-white shadow-soft transition-all hover:shadow-lg active:scale-95"
       >
         {copy.emptyAction}
       </button>

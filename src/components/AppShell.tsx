@@ -6,14 +6,11 @@ interface AppShellProps {
 
 export default function AppShell({ children }: AppShellProps) {
   return (
-    <div className="flex h-screen w-screen flex-col overflow-hidden bg-washi">
+    <div className="flex h-screen w-screen flex-col overflow-hidden bg-washi" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       {/* Main content area */}
       <div className="flex-1 overflow-auto">
         {children}
       </div>
-
-      {/* Safe area support for notch/dynamic island */}
-      <div className="h-safe-area-inset-bottom bg-washi" />
     </div>
   );
 }

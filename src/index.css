@@ -52,6 +52,8 @@ input[type="search"],
 textarea {
   appearance: none;
   border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
   transition: none;
 }
 
@@ -66,3 +68,38 @@ input, textarea {
   -webkit-user-select: text;
   user-select: text;
 }
+
+/* Safe area support */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* iOS keyboard handling */
+@media (hover: none) and (pointer: coarse) {
+  button:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Smooth scrolling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 27, 24, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 27, 24, 0.25);
+}
+

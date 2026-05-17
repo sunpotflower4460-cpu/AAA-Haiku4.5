@@ -44,7 +44,7 @@ export default function NoteEditor({
       };
       onSave(updated);
       setShowSavedStatus(true);
-      setTimeout(() => setShowSavedStatus(false), 2000);
+      setTimeout(() => setShowSavedStatus(false), 1800);
     }
   }, [note, title, body, isFavorite, onSave]);
 
@@ -62,9 +62,9 @@ export default function NoteEditor({
     }
   };
 
-  // Auto-save on content change
+  // Auto-save on content change with debouncing
   useEffect(() => {
-    const timer = setTimeout(handleSaveInternal, 500);
+    const timer = setTimeout(handleSaveInternal, 800);
     return () => clearTimeout(timer);
   }, [handleSaveInternal]);
 
@@ -155,7 +155,7 @@ export default function NoteEditor({
           value={body}
           onChange={(e) => setBody(e.target.value)}
           placeholder={copy.writeHere}
-          className="h-full w-full resize-none bg-transparent text-base text-sumi placeholder-ink-muted/50 outline-none leading-relaxed-jp transition-none"
+          className="h-full w-full resize-none bg-transparent text-base text-sumi placeholder-ink-muted/50 outline-none leading-relaxed-jp"
         />
       </div>
     </div>

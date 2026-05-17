@@ -28,7 +28,7 @@ export default function NoteCard({
   };
 
   const title = note.title || copy.untitledNote;
-  const preview = note.body.substring(0, 60).replace(/\n/g, ' ') || '(本文なし)';
+  const preview = note.body ? note.body.substring(0, 60).replace(/\n/g, ' ') : '（本文なし）';
 
   return (
     <div
