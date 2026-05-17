@@ -5,29 +5,29 @@
 
 ---
 
-## アプリ概要
+## クイックスタート
 
-「残心」は、和の美意識・間・余白・静けさを大切にした、シンプルなiOS向けメモアプリです。
+### 必要な環境
+- Node.js 18+
+- npm 10+
 
-大量の機能で埋めるのではなく、  
-書くこと、読み返すこと、書いたあとに残る余韻を美しくすることを目指します。
+### セットアップ
 
----
+```bash
+# 依存パッケージのインストール
+npm install
 
-## ターゲット
+# 開発サーバー起動
+npm run dev
 
-**日本向け**
+# ビルド（本番用）
+npm run build
 
-- シンプルで美しいメモ帳が欲しい人
-- 和のデザインが好きな人
-- 日記、詩、創作メモ、アイデアメモを書く人
-- 静かで落ち着いたUIを好む人
+# ビルド結果のプレビュー
+npm run preview
+```
 
-**海外向け**
-
-- Japanese minimalism / Zen / Wabi-sabi
-- Samurai-inspired calm focus
-- Mindful writing / Calm journaling
+開発サーバーは `http://localhost:5173` で起動します。
 
 ---
 
@@ -35,16 +35,118 @@
 
 | 機能 | 説明 |
 |------|------|
-| メモ一覧 | 書いたメモを静かに並べる |
-| メモ作成 | 新しい言葉を置く |
-| メモ編集 | 言葉を直す |
-| メモ削除 | 言葉を手放す |
-| 自動保存 | 静かに、気配なく保存する |
-| 検索 | 過去の言葉を手繰り寄せる |
-| お気に入り | 大切な言葉を残す |
-| ローカル保存 | まずはデバイスの中に |
-| iPhone向けUI | 手のひらに収まる静けさ |
-| 多言語文言設計 | 日本語・英語を意識した言葉づかい |
+| ✅ メモ一覧 | 書いたメモを静かに並べる |
+| ✅ メモ作成 | 新しい言葉を置く |
+| ✅ メモ編集 | 言葉を直す |
+| ✅ メモ削除 | 言葉を手放す |
+| ✅ 自動保存 | 静かに、気配なく保存する |
+| ✅ 検索 | 過去の言葉を手繰り寄せる |
+| ✅ お気に入り | 大切な言葉を残す |
+| ✅ ローカル保存 | デバイスの中に安全に保存 |
+| ✅ iPhone向けUI | 手のひらに収まる静けさ |
+| ✅ 多言語文言設計 | 日本語・英語を意識した言葉づかい |
+
+---
+
+## プロジェクト構成
+
+```
+src/
+  App.tsx                  # メインアプリケーション
+  main.tsx                 # エントリーポイント
+  index.css                # グローバルスタイル
+  types/
+    note.ts                # Note型定義
+  lib/
+    storage.ts             # localStorage操作
+    date.ts                # 日付フォーマット
+    i18n.ts                # 多言語文言管理
+  components/
+    AppShell.tsx           # アプリケーション基本レイアウト
+    NotesList.tsx          # メモ一覧画面
+    NoteCard.tsx           # メモカードコンポーネント
+    NoteEditor.tsx         # メモ編集画面
+    SearchBar.tsx          # 検索バー
+    EmptyState.tsx         # 空状態表示
+```
+
+---
+
+## デザイン思想
+
+「残心」は以下の美学に基づいて設計されています：
+
+- **残心（ざんしん）** - 行動の後に心が残る感覚
+- **間（ま）** - 余白の力、沈黙の意味
+- **余白** - 思考の余地
+- **静けさ** - ノイズのない体験
+- **和の美意識** - 控えめで、でも深い
+
+### カラーパレット
+
+| 色名 | 用途 | HEX |
+|------|------|-----|
+| **和紙色（Washi）** | 背景 | #F7F1E5 |
+| **墨色（Sumi）** | テキスト | #1F1B18 |
+| **金色（Gold）** | アクセント・お気に入り | #C9A646 |
+| **藍色（Indigo）** | セカンダリーアクション | #243B53 |
+| **朱色（Vermilion）** | 削除・警告 | #B14A36 |
+
+---
+
+## データ保存
+
+MVPはブラウザの `localStorage` を使用してデータを保存します。
+
+**保存キー**: `zanshin.notes.v1`
+
+**データ構造**:
+```typescript
+type Note = {
+  id: string;              // ユニークID
+  title: string;           # メモのタイトル
+  body: string;            # メモの本文
+  createdAt: string;       # 作成日時（ISO 8601）
+  updatedAt: string;       # 更新日時（ISO 8601）
+  isFavorite: boolean;     # お気に入りフラグ
+  locale?: "ja" | "en";    # ロケール（将来用）
+};
+```
+
+---
+
+## 開発フェーズ
+
+| フェーズ | 状態 | 説明 |
+|----------|------|------|
+| **Phase 1** | ✅ 完了 | 設計・コンセプト確立 |
+| **Phase 2** | ✅ 完了 | 設計監査 |
+| **Phase 3** | 🔄 進行中 | MVP実装 |
+
+詳細は [docs/development-phases.md](docs/development-phases.md) を参照。
+
+---
+
+## Cloudflare Pagesデプロイ方針
+
+**Phase 3のMVP実装中はCloudflare Pagesへのデプロイはしません。**
+
+MVP完成後、以下の条件がすべて満たされている場合にのみ、デプロイ準備を行います：
+
+- ✅ `npm run build` が成功している
+- ✅ すべてのMVP機能が動作している
+- ✅ READMEが完全に更新されている
+- ✅ Phase 1/2の設計と大きくズレていない
+
+### デプロイ準備（将来）
+
+Cloudflare Pagesへのデプロイ時の推奨設定：
+
+```
+Build command: npm run build
+Build output directory: dist
+Environment: Node.js 18
+```
 
 ---
 
@@ -53,29 +155,9 @@
 - **Vite** — 高速な開発環境
 - **React + TypeScript** — 型安全なコンポーネント設計
 - **Tailwind CSS** — 余白と間を制御しやすいユーティリティCSS
-- **localStorage / IndexedDB** — MVPはローカル保存から
+- **localStorage** — MVPはローカル保存から
 - **PWA対応** — ブラウザからでもiOS的体験を
 - **Capacitor（将来）** — ネイティブiOSアプリ化への備え
-
----
-
-## 開発フェーズ
-
-| フェーズ | 内容 | Cloudflareデプロイ |
-|----------|------|-------------------|
-| **Phase 1** | README/docsに設計を入れる | しない |
-| **Phase 2** | 監査フェーズ（設計確認・微修正） | しない |
-| **Phase 3** | MVPまで一気に作る | MVP完成後のみ |
-
-詳細は [docs/development-phases.md](docs/development-phases.md) を参照。
-
----
-
-## Cloudflare Pagesルール
-
-- Phase 1ではデプロイしない
-- Phase 2でもデプロイしない
-- **Phase 3のMVP完成後のみ**、必要に応じてCloudflare Pagesへのデプロイ準備を行う
 
 ---
 
@@ -88,3 +170,27 @@
 | [docs/mvp-spec.md](docs/mvp-spec.md) | MVP仕様 |
 | [docs/development-phases.md](docs/development-phases.md) | 開発フェーズ |
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Cloud Agent / Copilot向け作業ルール |
+
+---
+
+## ライセンス
+
+ISC
+
+---
+
+**残心は、機能の多さで勝負しないメモ帳です。**
+
+```
+静かに開く
+  ↓
+言葉を置く
+  ↓
+静かに保存される
+  ↓
+読み返せる
+  ↓
+また戻ってくる
+```
+
+この体験を大切にしています。
