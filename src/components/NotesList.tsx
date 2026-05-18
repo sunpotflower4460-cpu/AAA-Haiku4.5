@@ -54,7 +54,7 @@ export default function NotesList({
         <h1 className="text-5xl font-serif font-semibold text-sumi tracking-tight">
           {copy.appName}
         </h1>
-        <p className="mt-[13px] text-xs tracking-wide text-ink-muted/70 uppercase letter-spacing-1">
+        <p className="mt-[13px] text-xs tracking-wide text-ink-muted/70 uppercase">
           {copy.appSubtitle}
         </p>
         <p className="mt-[8px] text-xs text-ink-muted/50 leading-relaxed">

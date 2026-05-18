@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
     "Noto Serif JP",
     "Noto Serif",
     serif;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -132,5 +132,15 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 2px solid #C9A646;
   outline-offset: 2px;
+}
+
+/* Mobile touch affordance - always show action buttons on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .group {
+    border-color: rgba(201, 166, 70, 0.2);
+  }
+  .group .opacity-0 {
+    opacity: 1 !important;
+  }
 }
 

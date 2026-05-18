@@ -33,7 +33,7 @@ export default function NoteCard({
   return (
     <div
       onClick={() => onEdit(note)}
-      className="group relative flex cursor-pointer items-start gap-[13px] rounded-md border border-line bg-paper px-[21px] py-[21px] shadow-soft transition-all hover:shadow-lg hover:translate-x-1 active:scale-95 animate-fade-in"
+      className="group relative flex cursor-pointer items-start gap-[13px] rounded-md border border-line bg-paper px-[21px] py-[21px] shadow-soft transition-all hover:shadow-lg hover:translate-x-1 active:scale-95 animate-fade-in md:opacity-0-on-touch"
     >
       {/* Left accent line - like a katana blade */}
       <div className={`absolute left-0 top-0 bottom-0 w-0.5 transition-colors ${
@@ -59,8 +59,8 @@ export default function NoteCard({
         </p>
       </div>
 
-      {/* Actions - hidden until hover on desktop */}
-      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+      {/* Actions - hidden until hover on desktop, visible on mobile via CSS */}
+      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100 max-sm:opacity-100">
         <button
           onClick={handleToggleFavorite}
           className="inline-flex h-10 w-10 items-center justify-center rounded transition-colors hover:bg-gold/10 active:scale-90 focus-visible:outline-2 focus-visible:outline-gold"
@@ -98,18 +98,6 @@ export default function NoteCard({
           </svg>
         </button>
       </div>
-
-      {/* Mobile touch affordance */}
-      <style>{`
-        @media (hover: none) and (pointer: coarse) {
-          .group {
-            border-color: rgba(201, 166, 70, 0.2);
-          }
-          .group .opacity-0 {
-            opacity: 1;
-          }
-        }
-      `}</style>
     </div>
   );
 }
