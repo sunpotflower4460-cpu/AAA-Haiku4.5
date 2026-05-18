@@ -49,11 +49,17 @@ export default function NotesList({
 
   return (
     <div className="flex h-full flex-col bg-washi">
-      {/* Header */}
-      <div className="shrink-0 border-b border-line px-[21px] py-[34px] text-center">
-        <h1 className="text-4xl font-bold text-sumi">{copy.appName}</h1>
-        <p className="mt-2 text-sm text-ink-muted">{copy.appSubtitle}</p>
-        <p className="mt-1 text-xs text-ink-muted">{copy.tagline}</p>
+      {/* Header with more breathing room */}
+      <div className="shrink-0 border-b border-line px-[21px] pt-[34px] pb-[21px] text-center">
+        <h1 className="text-5xl font-serif font-semibold text-sumi tracking-tight">
+          {copy.appName}
+        </h1>
+        <p className="mt-[13px] text-xs tracking-wide text-ink-muted/70 uppercase letter-spacing-1">
+          {copy.appSubtitle}
+        </p>
+        <p className="mt-[8px] text-xs text-ink-muted/50 leading-relaxed">
+          {copy.tagline}
+        </p>
       </div>
 
       {/* Search Bar */}
@@ -78,7 +84,7 @@ export default function NotesList({
             <EmptyState onNewNote={onNewNote} />
           )
         ) : (
-          <div className="space-y-[13px] p-[21px] pb-[89px]">
+          <div className="space-y-[13px] p-[21px] pb-[89px] animate-fade-in">
             {filteredNotes.map((note) => (
               <NoteCard
                 key={note.id}
@@ -92,11 +98,12 @@ export default function NotesList({
         )}
       </div>
 
-      {/* Floating Action Button */}
+      {/* Floating Action Button - enhanced */}
       <button
         onClick={onNewNote}
-        className="fixed bottom-[34px] right-[21px] z-40 flex h-[55px] w-[55px] items-center justify-center rounded-full bg-gold text-white shadow-soft transition-all hover:shadow-lg active:scale-95"
+        className="fixed bottom-[34px] right-[21px] z-40 flex h-[55px] w-[55px] items-center justify-center rounded-full bg-gold text-white shadow-soft transition-all hover:shadow-lg hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
         aria-label={copy.newNote}
+        title={copy.newNote}
       >
         <svg
           className="h-6 w-6"

@@ -33,32 +33,42 @@ export default function NoteCard({
   return (
     <div
       onClick={() => onEdit(note)}
-      className="group relative flex cursor-pointer items-start gap-[13px] rounded-lg border border-line bg-paper px-[21px] py-[21px] shadow-soft transition-all hover:shadow-lg active:scale-95"
+      className="group relative flex cursor-pointer items-start gap-[13px] rounded-md border border-line bg-paper px-[21px] py-[21px] shadow-soft transition-all hover:shadow-lg hover:translate-x-1 active:scale-95 animate-fade-in"
     >
-      {/* Left accent line if favorite */}
-      {note.isFavorite && (
-        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-lg bg-gold" />
-      )}
+      {/* Left accent line - like a katana blade */}
+      <div className={`absolute left-0 top-0 bottom-0 w-0.5 transition-colors ${
+        note.isFavorite ? 'bg-gold' : 'bg-line/0'
+      } rounded-l-md`} />
 
       {/* Content */}
       <div className="flex-1 min-w-0">
-        <h2 className="truncate font-serif text-lg font-semibold text-sumi">
-          {title}
-        </h2>
-        <p className="mt-1 line-clamp-2 text-sm text-ink-muted">{preview}</p>
-        <p className="mt-2 text-xs text-ink-muted/70">{formatDate(note.updatedAt)}</p>
+        <div className="flex items-start gap-[8px]">
+          <h2 className="flex-1 truncate font-serif text-lg font-semibold text-sumi leading-tight">
+            {title}
+          </h2>
+          {/* Small gold marker for favorites */}
+          {note.isFavorite && (
+            <div className="shrink-0 h-2 w-2 rounded-full bg-gold mt-1" title="お気に入り" />
+          )}
+        </div>
+        <p className="mt-[8px] line-clamp-2 text-sm text-ink-muted leading-relaxed">
+          {preview}
+        </p>
+        <p className="mt-[13px] text-xs text-ink-muted/60">
+          {formatDate(note.updatedAt)}
+        </p>
       </div>
 
-      {/* Actions */}
-      <div className="flex shrink-0 gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+      {/* Actions - hidden until hover on desktop */}
+      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
         <button
           onClick={handleToggleFavorite}
-          className="inline-flex h-8 w-8 items-center justify-center rounded hover:bg-paper transition-colors"
+          className="inline-flex h-10 w-10 items-center justify-center rounded transition-colors hover:bg-gold/10 active:scale-90 focus-visible:outline-2 focus-visible:outline-gold"
           aria-label="Toggle favorite"
           title="お気に入り"
         >
           <svg
-            className={`h-5 w-5 ${
+            className={`h-5 w-5 transition-colors ${
               note.isFavorite ? 'fill-gold text-gold' : 'text-ink-muted'
             }`}
             viewBox="0 0 24 24"
@@ -69,7 +79,7 @@ export default function NoteCard({
         </button>
         <button
           onClick={handleDelete}
-          className="inline-flex h-8 w-8 items-center justify-center rounded hover:bg-red-100 transition-colors"
+          className="inline-flex h-10 w-10 items-center justify-center rounded transition-colors hover:bg-vermilion/10 active:scale-90 focus-visible:outline-2 focus-visible:outline-vermilion"
           aria-label="Delete note"
           title="削除"
         >
@@ -88,6 +98,18 @@ export default function NoteCard({
           </svg>
         </button>
       </div>
+
+      {/* Mobile touch affordance */}
+      <style>{`
+        @media (hover: none) and (pointer: coarse) {
+          .group {
+            border-color: rgba(201, 166, 70, 0.2);
+          }
+          .group .opacity-0 {
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 }

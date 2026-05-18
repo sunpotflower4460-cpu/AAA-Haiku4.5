@@ -74,8 +74,9 @@ export default function NoteEditor({
       <div className="shrink-0 flex items-center justify-between border-b border-line px-[21px] py-[21px] gap-[13px]">
         <button
           onClick={onBack}
-          className="inline-flex h-10 w-10 items-center justify-center rounded hover:bg-paper transition-colors"
+          className="inline-flex h-10 w-10 items-center justify-center rounded transition-colors hover:bg-paper/50 active:scale-90 focus-visible:outline-2 focus-visible:outline-gold"
           aria-label={copy.back}
+          title={copy.back}
         >
           <svg
             className="h-6 w-6 text-sumi"
@@ -92,9 +93,9 @@ export default function NoteEditor({
           </svg>
         </button>
 
-        {/* Save status indicator */}
+        {/* Save status indicator - subtle */}
         {showSavedStatus && (
-          <span className="text-xs text-gold animate-fade-out">
+          <span className="text-xs text-gold/70 animate-fade-out font-medium">
             {copy.saved}
           </span>
         )}
@@ -103,11 +104,12 @@ export default function NoteEditor({
 
         <button
           onClick={handleToggleFavorite}
-          className="inline-flex h-10 w-10 items-center justify-center rounded hover:bg-paper transition-colors"
+          className="inline-flex h-10 w-10 items-center justify-center rounded transition-colors hover:bg-paper/50 active:scale-90 focus-visible:outline-2 focus-visible:outline-gold"
           aria-label={copy.favorite}
+          title={copy.favorite}
         >
           <svg
-            className={`h-6 w-6 ${
+            className={`h-6 w-6 transition-colors ${
               isFavorite ? 'fill-gold text-gold' : 'text-ink-muted'
             }`}
             viewBox="0 0 24 24"
@@ -119,8 +121,9 @@ export default function NoteEditor({
 
         <button
           onClick={handleDelete}
-          className="inline-flex h-10 w-10 items-center justify-center rounded hover:bg-red-100 transition-colors"
+          className="inline-flex h-10 w-10 items-center justify-center rounded transition-colors hover:bg-vermilion/10 active:scale-90 focus-visible:outline-2 focus-visible:outline-vermilion"
           aria-label={copy.delete}
+          title={copy.delete}
         >
           <svg
             className="h-6 w-6 text-vermilion"
@@ -145,17 +148,17 @@ export default function NoteEditor({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder={copy.noTitle}
-          className="w-full bg-transparent font-serif text-2xl font-semibold text-sumi placeholder-ink-muted/50 outline-none"
+          className="w-full bg-transparent font-serif text-3xl font-semibold text-sumi placeholder-ink-muted/30 outline-none leading-tight tracking-tight"
         />
       </div>
 
       {/* Body Input */}
-      <div className="flex-1 overflow-hidden px-[21px] py-[34px]">
+      <div className="flex-1 overflow-hidden px-[21px] py-[34px] flex flex-col">
         <textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}
           placeholder={copy.writeHere}
-          className="h-full w-full resize-none bg-transparent text-base text-sumi placeholder-ink-muted/50 outline-none leading-relaxed-jp"
+          className="flex-1 w-full resize-none bg-transparent text-base text-sumi placeholder-ink-muted/30 outline-none leading-relaxed-jp"
         />
       </div>
     </div>
