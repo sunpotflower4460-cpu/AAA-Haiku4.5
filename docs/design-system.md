@@ -60,7 +60,17 @@ font-family:
   "Noto Serif JP",
   "Noto Serif",
   serif;
+font-weight: 700; /* Bold for headings */
+letter-spacing: -0.02em; /* Modern tightness */
 ```
+
+**フォントウェイト：**
+- **見出し（h1-h6）**: `font-weight: 700` （Bold）
+  - 日本語の Serif フォントで視認性を確保
+  - 600 では十分な印象が出にくい場合があるため、700 を採用
+- **本文**: `font-weight: 400` （Regular）
+  - 読みやすさを優先
+- **特別な強調**: `font-weight: 700` （Bold）
 
 ### 本文入力（読みやすさ優先）
 
